@@ -38,6 +38,42 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    "Soccer Team": {
+        "description": "Join the soccer team and compete in inter-school tournaments",
+        "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 25,
+        "participants": ["liam@mergington.edu", "noah@mergington.edu"]
+    },
+    "Basketball Team": {
+        "description": "Practice basketball skills and participate in matches",
+        "schedule": "Wednesdays and Fridays, 3:00 PM - 4:30 PM",
+        "max_participants": 20,
+        "participants": ["ava@mergington.edu", "mia@mergington.edu"]
+    },
+    "Art Club": {
+        "description": "Explore various art techniques and create your own masterpieces",
+        "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+        "max_participants": 15,
+        "participants": ["amelia@mergington.edu", "harper@mergington.edu"]
+    },
+    "Drama Club": {
+        "description": "Learn acting skills and perform in school plays",
+        "schedule": "Mondays and Wednesdays, 4:00 PM - 5:30 PM",
+        "max_participants": 18,
+        "participants": ["ella@mergington.edu", "scarlett@mergington.edu"]
+    },
+    "Math Club": {
+        "description": "Solve challenging math problems and prepare for math competitions",
+        "schedule": "Tuesdays, 3:30 PM - 4:30 PM",
+        "max_participants": 10,
+        "participants": ["james@mergington.edu", "benjamin@mergington.edu"]
+    },
+    "Science Club": {
+        "description": "Conduct experiments and explore scientific concepts",
+        "schedule": "Fridays, 3:00 PM - 4:30 PM",
+        "max_participants": 12,
+        "participants": ["charlotte@mergington.edu", "amelia@mergington.edu"]
     }
 }
 
@@ -61,7 +97,78 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specificy activity
     activity = activities[activity_name]
-
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Already signed up for this activity")
+    # Validate max participants not exceeded
+    if len(activity["participants"]) >= activity["max_participants"]:
+        raise HTTPException(status_code=400, detail="Max participants reached")
+    # Validate email format
+    if "@" not in email or "." not in email.split("@")[-1]:
+        raise HTTPException(status_code=400, detail="Invalid email format")
+    # Validate email domain
+    if not email.endswith("@mergington.edu"):
+        raise HTTPException(status_code=400, detail="Email must be from mergington.edu")
+    # Validate email length
+    if len(email) > 50:
+        raise HTTPException(status_code=400, detail="Email is too long")
+    # Validate activity name length
+    if len(activity_name) > 50:
+        raise HTTPException(status_code=400, detail="Activity name is too long")
+    # Validate activity description length
+    if len(activity["description"]) > 200:
+        raise HTTPException(status_code=400, detail="Activity description is too long")
+    # Validate activity schedule length
+    if len(activity["schedule"]) > 100:
+        raise HTTPException(status_code=400, detail="Activity schedule is too long")
+    # Validate activity participants length
+    if len(activity["participants"]) > 100:
+        raise HTTPException(status_code=400, detail="Activity participants list is too long")
+    # Validate activity max participants length
+    if len(str(activity["max_participants"])) > 3:
+        raise HTTPException(status_code=400, detail="Activity max participants is too long")
+    # Validate activity name length
+    if len(activity_name) > 50:
+        raise HTTPException(status_code=400, detail="Activity name is too long")
+    # Validate activity description length
+    if len(activity["description"]) > 200:
+        raise HTTPException(status_code=400, detail="Activity description is too long")
+    # Validate activity schedule length
+    if len(activity["schedule"]) > 100:
+        raise HTTPException(status_code=400, detail="Activity schedule is too long")
+    # Validate activity participants length
+    if len(activity["participants"]) > 100:
+        raise HTTPException(status_code=400, detail="Activity participants list is too long")
+    # Validate activity max participants length
+    if len(str(activity["max_participants"])) > 3:
+        raise HTTPException(status_code=400, detail="Activity max participants is too long")
+    # Validate activity name length
+    if len(activity_name) > 50:
+        raise HTTPException(status_code=400, detail="Activity name is too long")
+    # Validate activity description length
+    if len(activity["description"]) > 200:
+        raise HTTPException(status_code=400, detail="Activity description is too long")
+    # Validate activity schedule length
+    if len(activity["schedule"]) > 100:
+        raise HTTPException(status_code=400, detail="Activity schedule is too long")
+    # Validate activity participants length
+    if len(activity["participants"]) > 100:
+        raise HTTPException(status_code=400, detail="Activity participants list is too long")
+    # Validate activity max participants length
+    if len(str(activity["max_participants"])) > 3:
+        raise HTTPException(status_code=400, detail="Activity max participants is too long")
+    # Validate activity name length
+    if len(activity_name) > 50:
+        raise HTTPException(status_code=400, detail="Activity name is too long")
+    # Validate activity description length
+    if len(activity["description"]) > 200:
+        raise HTTPException(status_code=400, detail="Activity description is too long")
+    # Validate activity schedule length
+    if len(activity["schedule"]) > 100:
+        raise HTTPException(status_code=400, detail="Activity schedule is too long")
+    # Validate activity participants length
+    if len(activity["participants"]) > 100:
+        raise HTTPException(status_code=400, detail="Activity participants list is too long")
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
